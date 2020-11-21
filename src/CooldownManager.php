@@ -8,7 +8,7 @@ use Carbon\Carbon;
 use CyrildeWit\EloquentViewable\Contracts\Viewable;
 use DateTime;
 use Illuminate\Contracts\Config\Repository as ConfigRepository;
-use Illuminate\Contracts\Session\Session;
+use Illuminate\Http\Request;
 
 class CooldownManager
 {
@@ -31,9 +31,9 @@ class CooldownManager
      *
      * @return void
      */
-    public function __construct(ConfigRepository $config, Session $session)
+    public function __construct(ConfigRepository $config, Request $session)
     {
-        $this->session = $session;
+        $this->session = $session->session();
         $this->primaryKey = $config['eloquent-viewable']['cooldown']['key'];
     }
 
